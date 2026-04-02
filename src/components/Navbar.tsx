@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Leaf } from 'lucide-react';
 
 const navLinks = [
   { label: 'Home', href: '#home' },
@@ -21,13 +21,13 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass py-3' : 'py-6'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass-jungle py-3' : 'py-6'}`} style={scrolled ? { boxShadow: '0 4px 30px hsla(0,0%,0%,0.3)' } : {}}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <a href="#home" className="font-display text-xl tracking-wider text-foreground hover:text-primary transition-colors">
+        <a href="#home" className="font-display text-xl tracking-wider text-foreground hover:text-primary transition-colors flex items-center gap-2">
+          <Leaf size={20} className="text-accent" />
           Lost in Paradise
         </a>
 
-        {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((l) => (
             <a
@@ -40,15 +40,13 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Mobile toggle */}
         <button onClick={() => setOpen(!open)} className="md:hidden text-foreground">
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile menu */}
       {open && (
-        <div className="md:hidden glass mt-2 mx-4 rounded-2xl p-6 animate-[fade-up_0.3s_ease-out]">
+        <div className="md:hidden glass-jungle mt-2 mx-4 rounded-2xl p-6 animate-[fade-up_0.3s_ease-out]" style={{ boxShadow: '0 8px 32px hsla(0,0%,0%,0.4)' }}>
           {navLinks.map((l) => (
             <a
               key={l.href}

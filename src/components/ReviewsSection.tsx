@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { Star, ChevronLeft, ChevronRight, Leaf } from 'lucide-react';
 
 const reviews = [
   { name: 'Sarah M.', rating: 5, text: 'This book broke me open and put me back together. A masterpiece of raw emotion and breathtaking scenery. I couldn\'t put it down.', location: 'New York, USA' },
@@ -15,28 +15,60 @@ const ReviewsSection = () => {
   const prev = () => setCurrent((c) => (c === 0 ? reviews.length - 1 : c - 1));
   const next = () => setCurrent((c) => (c === reviews.length - 1 ? 0 : c + 1));
 
+  const fireflies = useMemo(() =>
+    Array.from({ length: 6 }, (_, i) => ({
+      id: i,
+      size: Math.random() * 3 + 2,
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      delay: Math.random() * 6,
+      duration: Math.random() * 5 + 4,
+    })),
+    []
+  );
+
   return (
     <section id="reviews" className="section-padding relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-8" style={{ background: 'radial-gradient(circle, hsl(40, 100%, 80%), transparent 70%)' }} />
+      {/* Jungle clearing glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.08]" style={{ background: 'radial-gradient(circle, hsl(45, 100%, 70%), transparent 60%)' }} />
+      <div className="absolute top-[20%] left-[5%] w-[300px] h-[300px] rounded-full opacity-[0.06]" style={{ background: 'radial-gradient(circle, hsl(155, 60%, 40%), transparent 70%)' }} />
 
-      <div className="max-w-5xl mx-auto">
+      {/* Fireflies */}
+      {fireflies.map((f) => (
+        <div
+          key={f.id}
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            width: f.size,
+            height: f.size,
+            left: `${f.left}%`,
+            top: `${f.top}%`,
+            background: 'hsl(45, 100%, 70%)',
+            boxShadow: `0 0 ${f.size * 4}px ${f.size}px hsla(45, 100%, 70%, 0.3)`,
+            animation: `firefly-float ${f.duration}s ease-in-out ${f.delay}s infinite`,
+          }}
+        />
+      ))}
+
+      <div className="max-w-5xl mx-auto relative z-10">
         <div className="text-center mb-16 animate-on-scroll">
-          <p className="text-sm uppercase tracking-[0.3em] text-primary font-body mb-3">Reader Love</p>
+          <p className="text-sm uppercase tracking-[0.3em] text-primary font-body mb-3 flex items-center justify-center gap-2">
+            <Leaf size={14} className="text-accent" />
+            Reader Love
+          </p>
           <h2 className="text-4xl md:text-5xl font-display font-bold">
-            What Readers <span className="gradient-text-sunset">Say</span>
+            What Readers <span className="gradient-text-sunlight">Say</span>
           </h2>
         </div>
 
-        {/* Carousel */}
         <div className="relative animate-on-scroll">
-          <div className="glass-card p-8 md:p-12 text-center max-w-3xl mx-auto">
-            {/* Stars */}
+          <div className="glass-jungle rounded-2xl p-8 md:p-12 text-center max-w-3xl mx-auto">
             <div className="flex justify-center gap-1 mb-6">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star
                   key={i}
                   size={20}
-                  className={`transition-all duration-300 ${i < reviews[current].rating ? 'text-sand-gold fill-sand-gold' : 'text-muted-foreground'}`}
+                  className={`transition-all duration-300 ${i < reviews[current].rating ? 'text-primary fill-primary' : 'text-muted-foreground'}`}
                 />
               ))}
             </div>
@@ -51,12 +83,10 @@ const ReviewsSection = () => {
             </div>
           </div>
 
-          {/* Nav buttons */}
           <div className="flex justify-center gap-4 mt-8">
-            <button onClick={prev} className="w-12 h-12 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all duration-300" aria-label="Previous review">
+            <button onClick={prev} className="w-12 h-12 rounded-full glass-jungle flex items-center justify-center text-muted-foreground hover:text-primary hover:scale-110 transition-all duration-300" aria-label="Previous review">
               <ChevronLeft size={20} />
             </button>
-            {/* Dots */}
             <div className="flex items-center gap-2">
               {reviews.map((_, i) => (
                 <button
@@ -67,7 +97,7 @@ const ReviewsSection = () => {
                 />
               ))}
             </div>
-            <button onClick={next} className="w-12 h-12 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all duration-300" aria-label="Next review">
+            <button onClick={next} className="w-12 h-12 rounded-full glass-jungle flex items-center justify-center text-muted-foreground hover:text-primary hover:scale-110 transition-all duration-300" aria-label="Next review">
               <ChevronRight size={20} />
             </button>
           </div>
