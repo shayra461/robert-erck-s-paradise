@@ -1,22 +1,12 @@
-import { useState, FormEvent, useMemo } from 'react';
+import { useState, FormEvent } from 'react';
 import { Send, Mail, MapPin, Moon } from 'lucide-react';
 import { toast } from 'sonner';
+import bgNight from '@/assets/bg-jungle-night.jpg';
+import ParallaxSection from './ParallaxSection';
 
 const ContactSection = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [sending, setSending] = useState(false);
-
-  const fireflies = useMemo(() =>
-    Array.from({ length: 10 }, (_, i) => ({
-      id: i,
-      size: Math.random() * 3 + 2,
-      left: Math.random() * 100,
-      top: Math.random() * 100,
-      delay: Math.random() * 8,
-      duration: Math.random() * 5 + 4,
-    })),
-    []
-  );
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -37,103 +27,64 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="section-padding relative overflow-hidden">
-      {/* Tropical night ambient */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-[0.03]" style={{ background: 'linear-gradient(180deg, hsl(200, 80%, 15%), hsl(155, 45%, 8%))' }} />
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full opacity-[0.06]" style={{ background: 'radial-gradient(circle, hsl(200, 80%, 50%), transparent 70%)' }} />
-      <div className="absolute top-[20%] left-[10%] w-[300px] h-[300px] rounded-full opacity-[0.05]" style={{ background: 'radial-gradient(circle, hsl(155, 60%, 40%), transparent 70%)' }} />
-
-      {/* Fireflies */}
-      {fireflies.map((f) => (
-        <div
-          key={f.id}
-          className="absolute rounded-full pointer-events-none"
-          style={{
-            width: f.size,
-            height: f.size,
-            left: `${f.left}%`,
-            top: `${f.top}%`,
-            background: 'hsl(45, 100%, 70%)',
-            boxShadow: `0 0 ${f.size * 4}px ${f.size}px hsla(45, 100%, 70%, 0.25)`,
-            animation: `firefly-float ${f.duration}s ease-in-out ${f.delay}s infinite`,
-          }}
-        />
-      ))}
-
-      <div className="max-w-4xl mx-auto relative z-10">
-        <div className="text-center mb-16 animate-on-scroll">
-          <p className="text-sm uppercase tracking-[0.3em] text-primary font-body mb-3 flex items-center justify-center gap-2">
-            <Moon size={14} className="text-primary" />
-            Get in Touch
-          </p>
-          <h2 className="text-4xl md:text-5xl font-display font-bold">
-            <span className="gradient-text-sunlight">Contact</span> Robert
-          </h2>
-        </div>
-
-        <div className="grid md:grid-cols-5 gap-8">
-          <div className="md:col-span-2 space-y-6 animate-on-scroll slide-left">
-            <div className="glass-jungle rounded-2xl p-6 flex items-start gap-4">
-              <Mail className="w-5 h-5 text-primary mt-1 shrink-0" />
-              <div>
-                <p className="font-display text-sm font-semibold text-foreground">Email</p>
-                <p className="text-sm text-muted-foreground font-body">hello@roberterck.com</p>
-              </div>
-            </div>
-            <div className="glass-jungle rounded-2xl p-6 flex items-start gap-4">
-              <MapPin className="w-5 h-5 text-primary mt-1 shrink-0" />
-              <div>
-                <p className="font-display text-sm font-semibold text-foreground">Based in</p>
-                <p className="text-sm text-muted-foreground font-body">Somewhere between worlds</p>
-              </div>
-            </div>
+    <ParallaxSection
+      id="contact"
+      backgroundImage={bgNight}
+      overlay="linear-gradient(180deg, rgba(15,61,46,0.75) 0%, rgba(0,0,0,0.6) 100%)"
+      speed={0.15}
+    >
+      <div className="section-padding">
+        <div className="max-w-4xl mx-auto relative z-10">
+          <div className="text-center mb-16 animate-on-scroll">
+            <p className="text-sm uppercase tracking-[0.3em] text-primary font-body mb-3 flex items-center justify-center gap-2">
+              <Moon size={14} className="text-primary" />
+              Get in Touch
+            </p>
+            <h2 className="text-4xl md:text-5xl font-display font-bold">
+              <span className="gradient-text-sunlight">Contact</span> Robert
+            </h2>
           </div>
 
-          <form onSubmit={handleSubmit} className="md:col-span-3 glass-jungle rounded-2xl p-8 space-y-5 animate-on-scroll slide-right">
-            <div>
-              <label htmlFor="name" className="text-sm font-body text-muted-foreground mb-1 block">Name</label>
-              <input
-                id="name"
-                type="text"
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full bg-muted/50 border border-border rounded-lg px-4 py-3 text-foreground font-body placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
-                placeholder="Your name"
-                maxLength={100}
-              />
+          <div className="grid md:grid-cols-5 gap-8">
+            <div className="md:col-span-2 space-y-6 animate-on-scroll slide-left">
+              <div className="glass-jungle rounded-2xl p-6 flex items-start gap-4">
+                <Mail className="w-5 h-5 text-primary mt-1 shrink-0" />
+                <div>
+                  <p className="font-display text-sm font-semibold text-foreground">Email</p>
+                  <p className="text-sm text-foreground/60 font-body">hello@roberterck.com</p>
+                </div>
+              </div>
+              <div className="glass-jungle rounded-2xl p-6 flex items-start gap-4">
+                <MapPin className="w-5 h-5 text-primary mt-1 shrink-0" />
+                <div>
+                  <p className="font-display text-sm font-semibold text-foreground">Based in</p>
+                  <p className="text-sm text-foreground/60 font-body">Somewhere between worlds</p>
+                </div>
+              </div>
             </div>
-            <div>
-              <label htmlFor="email" className="text-sm font-body text-muted-foreground mb-1 block">Email</label>
-              <input
-                id="email"
-                type="email"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full bg-muted/50 border border-border rounded-lg px-4 py-3 text-foreground font-body placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
-                placeholder="your@email.com"
-                maxLength={255}
-              />
-            </div>
-            <div>
-              <label htmlFor="message" className="text-sm font-body text-muted-foreground mb-1 block">Message</label>
-              <textarea
-                id="message"
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                rows={4}
-                className="w-full bg-muted/50 border border-border rounded-lg px-4 py-3 text-foreground font-body placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all resize-none"
-                placeholder="Tell Robert what you think..."
-                maxLength={1000}
-              />
-            </div>
-            <button type="submit" disabled={sending} className="btn-paradise inline-flex items-center gap-2 w-full justify-center disabled:opacity-50">
-              <Send size={18} />
-              {sending ? 'Sending...' : 'Send Message'}
-            </button>
-          </form>
+
+            <form onSubmit={handleSubmit} className="md:col-span-3 glass-jungle rounded-2xl p-8 space-y-5 animate-on-scroll slide-right">
+              <div>
+                <label htmlFor="name" className="text-sm font-body text-foreground/60 mb-1 block">Name</label>
+                <input id="name" type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-muted/50 border border-border rounded-lg px-4 py-3 text-foreground font-body placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" placeholder="Your name" maxLength={100} />
+              </div>
+              <div>
+                <label htmlFor="email" className="text-sm font-body text-foreground/60 mb-1 block">Email</label>
+                <input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full bg-muted/50 border border-border rounded-lg px-4 py-3 text-foreground font-body placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" placeholder="your@email.com" maxLength={255} />
+              </div>
+              <div>
+                <label htmlFor="message" className="text-sm font-body text-foreground/60 mb-1 block">Message</label>
+                <textarea id="message" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} rows={4} className="w-full bg-muted/50 border border-border rounded-lg px-4 py-3 text-foreground font-body placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all resize-none" placeholder="Tell Robert what you think..." maxLength={1000} />
+              </div>
+              <button type="submit" disabled={sending} className="btn-paradise inline-flex items-center gap-2 w-full justify-center disabled:opacity-50">
+                <Send size={18} />
+                {sending ? 'Sending...' : 'Send Message'}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-    </section>
+    </ParallaxSection>
   );
 };
 

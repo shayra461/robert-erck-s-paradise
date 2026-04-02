@@ -1,15 +1,13 @@
-import { Heart, Leaf } from 'lucide-react';
+import { Heart } from 'lucide-react';
 
 const Footer = () => (
-  <footer className="border-t border-border py-8 px-6 text-center relative overflow-hidden">
-    <div className="absolute inset-0 opacity-[0.03]" style={{ background: 'linear-gradient(0deg, hsl(155, 50%, 25%), transparent)' }} />
+  <footer className="border-t border-border py-8 px-6 text-center relative overflow-hidden" style={{ background: 'rgba(10,30,20,0.95)' }}>
     <div className="relative z-10">
-      <p className="font-display text-lg gradient-text-sunlight mb-2 flex items-center justify-center gap-2">
-        <Leaf size={16} className="text-accent" />
-        Lost in Paradise
+      <p className="font-display text-lg gradient-text-sunlight mb-2">
+        Robert Erck
       </p>
-      <p className="text-sm text-muted-foreground font-body flex items-center justify-center gap-1">
-        Made with <Heart size={14} className="text-sunset-pink" /> by Robert Erck © {new Date().getFullYear()}
+      <p className="text-sm text-foreground/50 font-body flex items-center justify-center gap-1">
+        Made with <Heart size={14} className="text-sunset-pink" /> © {new Date().getFullYear()}
       </p>
     </div>
   </footer>
