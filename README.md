@@ -1,3 +1,3 @@
-# Welcome to your Lovable project
+# Robert Erck's Paradise - Lost In Paradise
 
 TODO: Document your project here
