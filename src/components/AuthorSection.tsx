@@ -1,6 +1,6 @@
 import { Instagram, Twitter, Facebook, Globe, TreePine } from 'lucide-react';
 import bgCanopy from '@/assets/bg-canopy.jpg';
-import authorPhoto from '@/assets/book-back-cover.png';
+import authorPhoto from '@/assets/author-photo.jpg';
 import ParallaxSection from './ParallaxSection';
 
 const socials = [
