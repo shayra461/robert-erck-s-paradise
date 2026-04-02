@@ -52,8 +52,11 @@ const BuySection = () => {
             ))}
           </div>
 
-          <div className="glass-jungle rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-6 max-w-2xl mx-auto animate-on-scroll">
-            <img src={bookCover} alt="Lost in Paradise" className="w-20 rounded shadow-lg" loading="lazy" />
+          <div className="glass-jungle rounded-2xl p-8 flex flex-col sm:flex-row items-center gap-8 max-w-3xl mx-auto animate-on-scroll">
+            <div className="flex items-center gap-4 shrink-0">
+              <img src={bookCover} alt="Lost in Paradise - Front Cover" className="w-24 rounded shadow-lg" loading="lazy" />
+              <img src={bookBackCover} alt="Lost in Paradise - Back Cover" className="w-24 rounded shadow-lg" loading="lazy" />
+            </div>
             <div className="text-center sm:text-left">
               <p className="font-display text-lg font-semibold text-foreground">Available worldwide</p>
               <p className="text-sm text-foreground/60 font-body">Also available on Kindle, Apple Books, and other major platforms.</p>

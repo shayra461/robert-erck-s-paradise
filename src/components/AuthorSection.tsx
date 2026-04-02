@@ -1,14 +1,7 @@
 import { Instagram, Twitter, Facebook, Globe, TreePine } from 'lucide-react';
 import bgCanopy from '@/assets/bg-canopy.jpg';
+import authorPhoto from '@/assets/book-back-cover.png';
 import ParallaxSection from './ParallaxSection';
-
-const timeline = [
-  { year: '2018', event: 'First journey to Southeast Asia — the seed of the story' },
-  { year: '2019', event: 'Six months living off-grid in a tropical village' },
-  { year: '2021', event: 'Began writing Lost in Paradise from personal journals' },
-  { year: '2023', event: 'Manuscript completed after two years of revisions' },
-  { year: '2024', event: 'Published — a dream realized' },
-];
 
 const socials = [
   { icon: Instagram, label: 'Instagram', href: '#' },
@@ -37,24 +30,28 @@ const AuthorSection = () => {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            <div className="animate-on-scroll slide-left">
-              <div className="glass-jungle rounded-2xl p-1 mb-8 max-w-sm mx-auto md:mx-0">
-                <div className="aspect-[3/4] rounded-xl overflow-hidden relative" style={{ background: 'linear-gradient(135deg, rgba(15,61,46,0.8), rgba(31,122,99,0.5))' }}>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <div
-                        className="w-24 h-24 rounded-full mx-auto mb-4 border-2 border-accent/30 flex items-center justify-center"
-                        style={{ background: 'linear-gradient(135deg, rgba(31,122,99,0.4), rgba(255,215,100,0.2))', boxShadow: '0 0 30px rgba(255,215,100,0.15)' }}
-                      >
-                        <span className="font-display text-3xl text-primary">RE</span>
-                      </div>
-                      <p className="font-display text-lg text-foreground">Robert Erck</p>
-                      <p className="text-sm text-foreground/60">Author & Adventurer</p>
-                    </div>
-                  </div>
-                </div>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="animate-on-scroll slide-left flex justify-center">
+              <div className="glass-jungle rounded-2xl p-2 max-w-sm">
+                <img
+                  src={authorPhoto}
+                  alt="Robert Erck - Author of Lost in Paradise"
+                  className="w-full rounded-xl shadow-lg"
+                  loading="lazy"
+                />
               </div>
+            </div>
+
+            <div className="animate-on-scroll slide-right">
+              <p className="font-story text-lg text-foreground/80 leading-relaxed mb-6 italic">
+                Robert Erck is a retired construction business owner whose first book recounts the unexpected events of his unforgettable elopement and honeymoon.
+              </p>
+              <p className="font-body text-foreground/60 leading-relaxed mb-6">
+                Now living in Florida with his wife Kathy, Robert reflects on how life's surprises can become some of its most bizarre memories. His memoir invites readers to join him on a journey filled with some of life's unexpected detours thrown in.
+              </p>
+              <p className="font-body text-foreground/60 leading-relaxed mb-8">
+                Lost in Paradise is his first published work — a true story that proves reality is often stranger and more beautiful than fiction.
+              </p>
 
               <div className="flex gap-4 justify-center md:justify-start">
                 {socials.map((s) => (
@@ -66,35 +63,6 @@ const AuthorSection = () => {
                   >
                     <s.icon size={18} />
                   </a>
-                ))}
-              </div>
-            </div>
-
-            <div className="animate-on-scroll slide-right">
-              <p className="font-story text-lg text-foreground/70 leading-relaxed mb-6 italic">
-                Robert Erck is a writer, traveler, and eternal wanderer. After years in the corporate world, he left everything behind to chase a feeling — a pull toward the unknown.
-              </p>
-              <p className="font-body text-foreground/60 leading-relaxed mb-10">
-                His writing blends raw emotion with vivid imagery, drawing readers into worlds that feel both foreign and deeply familiar. Lost in Paradise is his first published work.
-              </p>
-
-              <h3 className="font-display text-xl font-semibold mb-6 text-foreground">Writing Journey</h3>
-              <div className="space-y-0 relative">
-                <div className="absolute left-[7px] top-2 bottom-2 w-[2px]" style={{ background: 'linear-gradient(180deg, hsl(145, 55%, 35%), hsl(45, 100%, 70%), hsl(155, 60%, 40%))' }} />
-                {timeline.map((t, i) => (
-                  <div key={i} className="flex gap-4 pb-6 last:pb-0 relative group">
-                    <div
-                      className="w-4 h-4 rounded-full mt-1 shrink-0 relative z-10 transition-all duration-300 group-hover:scale-125"
-                      style={{
-                        background: `hsl(${145 + i * 10}, 55%, ${35 + i * 5}%)`,
-                        boxShadow: `0 0 12px hsla(${145 + i * 10}, 55%, ${35 + i * 5}%, 0.5)`,
-                      }}
-                    />
-                    <div>
-                      <span className="text-xs font-body text-primary tracking-wider">{t.year}</span>
-                      <p className="text-sm text-foreground/60 font-body">{t.event}</p>
-                    </div>
-                  </div>
                 ))}
               </div>
             </div>
