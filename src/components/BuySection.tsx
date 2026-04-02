@@ -1,5 +1,6 @@
 import { ShoppingCart, BookOpen, Headphones, Sun } from 'lucide-react';
 import bookCover from '@/assets/book-cover.jpg';
+import bookBackCover from '@/assets/book-back-cover.png';
 import bgSunset from '@/assets/bg-sunset-beach.jpg';
 import ParallaxSection from './ParallaxSection';
 
