@@ -52,6 +52,16 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        jungle: {
+          deep: "hsl(var(--jungle-deep))",
+          green: "hsl(var(--jungle-green))",
+        },
+        leaf: {
+          green: "hsl(var(--leaf-green))",
+        },
+        canopy: {
+          green: "hsl(var(--canopy-green))",
+        },
         sunset: {
           orange: "hsl(var(--sunset-orange))",
           pink: "hsl(var(--sunset-pink))",
@@ -67,6 +77,7 @@ export default {
         sand: {
           gold: "hsl(var(--sand-gold))",
         },
+        sunlight: "hsl(var(--sunlight))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -109,6 +120,15 @@ export default {
           "0%, 100%": { transform: "perspective(1000px) rotateY(-8deg) rotateX(2deg)" },
           "50%": { transform: "perspective(1000px) rotateY(-4deg) rotateX(0deg)" },
         },
+        "leaf-fall": {
+          "0%": { transform: "translateY(-10%) translateX(0) rotate(0deg)", opacity: "0" },
+          "10%": { opacity: "0.8" },
+          "100%": { transform: "translateY(110vh) translateX(100px) rotate(720deg)", opacity: "0" },
+        },
+        "breathe": {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.02)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -117,6 +137,7 @@ export default {
         "float-slow": "float-slow 8s ease-in-out infinite",
         "glow-pulse": "glow-pulse 3s ease-in-out infinite",
         "book-hover": "book-hover 4s ease-in-out infinite",
+        "breathe": "breathe 6s ease-in-out infinite",
       },
     },
   },

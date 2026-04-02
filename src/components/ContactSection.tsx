@@ -1,10 +1,22 @@
-import { useState, FormEvent } from 'react';
-import { Send, Mail, MapPin } from 'lucide-react';
+import { useState, FormEvent, useMemo } from 'react';
+import { Send, Mail, MapPin, Moon } from 'lucide-react';
 import { toast } from 'sonner';
 
 const ContactSection = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [sending, setSending] = useState(false);
+
+  const fireflies = useMemo(() =>
+    Array.from({ length: 10 }, (_, i) => ({
+      id: i,
+      size: Math.random() * 3 + 2,
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      delay: Math.random() * 8,
+      duration: Math.random() * 5 + 4,
+    })),
+    []
+  );
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -26,27 +38,49 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="section-padding relative overflow-hidden">
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full opacity-8" style={{ background: 'radial-gradient(circle, hsl(200, 80%, 50%), transparent 70%)' }} />
+      {/* Tropical night ambient */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-[0.03]" style={{ background: 'linear-gradient(180deg, hsl(200, 80%, 15%), hsl(155, 45%, 8%))' }} />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full opacity-[0.06]" style={{ background: 'radial-gradient(circle, hsl(200, 80%, 50%), transparent 70%)' }} />
+      <div className="absolute top-[20%] left-[10%] w-[300px] h-[300px] rounded-full opacity-[0.05]" style={{ background: 'radial-gradient(circle, hsl(155, 60%, 40%), transparent 70%)' }} />
+
+      {/* Fireflies */}
+      {fireflies.map((f) => (
+        <div
+          key={f.id}
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            width: f.size,
+            height: f.size,
+            left: `${f.left}%`,
+            top: `${f.top}%`,
+            background: 'hsl(45, 100%, 70%)',
+            boxShadow: `0 0 ${f.size * 4}px ${f.size}px hsla(45, 100%, 70%, 0.25)`,
+            animation: `firefly-float ${f.duration}s ease-in-out ${f.delay}s infinite`,
+          }}
+        />
+      ))}
 
       <div className="max-w-4xl mx-auto relative z-10">
         <div className="text-center mb-16 animate-on-scroll">
-          <p className="text-sm uppercase tracking-[0.3em] text-primary font-body mb-3">Get in Touch</p>
+          <p className="text-sm uppercase tracking-[0.3em] text-primary font-body mb-3 flex items-center justify-center gap-2">
+            <Moon size={14} className="text-primary" />
+            Get in Touch
+          </p>
           <h2 className="text-4xl md:text-5xl font-display font-bold">
-            <span className="gradient-text-sunset">Contact</span> Robert
+            <span className="gradient-text-sunlight">Contact</span> Robert
           </h2>
         </div>
 
         <div className="grid md:grid-cols-5 gap-8">
-          {/* Info */}
           <div className="md:col-span-2 space-y-6 animate-on-scroll slide-left">
-            <div className="glass-card p-6 flex items-start gap-4">
+            <div className="glass-jungle rounded-2xl p-6 flex items-start gap-4">
               <Mail className="w-5 h-5 text-primary mt-1 shrink-0" />
               <div>
                 <p className="font-display text-sm font-semibold text-foreground">Email</p>
                 <p className="text-sm text-muted-foreground font-body">hello@roberterck.com</p>
               </div>
             </div>
-            <div className="glass-card p-6 flex items-start gap-4">
+            <div className="glass-jungle rounded-2xl p-6 flex items-start gap-4">
               <MapPin className="w-5 h-5 text-primary mt-1 shrink-0" />
               <div>
                 <p className="font-display text-sm font-semibold text-foreground">Based in</p>
@@ -55,8 +89,7 @@ const ContactSection = () => {
             </div>
           </div>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="md:col-span-3 glass-card p-8 space-y-5 animate-on-scroll slide-right">
+          <form onSubmit={handleSubmit} className="md:col-span-3 glass-jungle rounded-2xl p-8 space-y-5 animate-on-scroll slide-right">
             <div>
               <label htmlFor="name" className="text-sm font-body text-muted-foreground mb-1 block">Name</label>
               <input
